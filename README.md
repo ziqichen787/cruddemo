@@ -1,5 +1,5 @@
 # cruddemo
-A tutorial: Build a REST CRUD API with Hibernate
+A tutorial: Build a REST CRUD API with Hibernate, using native hibernate API
 
 This is a hands-on tutorial of a Spring Boot project from Udemy course "Spring & Hibernate for Beginners (include Spring Boot)"
 
