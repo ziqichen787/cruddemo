@@ -40,9 +40,29 @@ public class EmployeeRestController {
     public Employee addEmployee(@RequestBody Employee theEmployee) {
 
         // also just in case they pass an id in JSON... set id to 0
-        // this is to force a save of a new item...instead of update    
+        // this is to force a save of a new item...instead of update
         theEmployee.setId(0);
         employeeService.save(theEmployee);
         return theEmployee;
+    }
+
+    // add mapping for PUT /employees - update existing employee
+    @PutMapping("/employees")
+    public Employee updateEmplyee(@RequestBody Employee theEmployee) {
+        employeeService.save(theEmployee);
+        return theEmployee;
+    }
+
+    // add mapping for DELETE /employees/{employeeId} - delete employee
+    @DeleteMapping("/employees/{employeeId}")
+    public String deleteEmployee(@PathVariable int employeeId) {
+        Employee tempEmployee = employeeService.findById(employeeId);
+
+        if (tempEmployee == null) {
+            throw new RuntimeException("Employee id not found - " + employeeId);
+        }
+
+        employeeService.deleteById(employeeId);
+        return "Deleted employee id - " + employeeId;
     }
 }
