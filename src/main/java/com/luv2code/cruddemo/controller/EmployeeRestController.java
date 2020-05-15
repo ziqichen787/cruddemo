@@ -2,6 +2,7 @@ package com.luv2code.cruddemo.controller;
 
 import com.luv2code.cruddemo.dao.EmployeeDAO;
 import com.luv2code.cruddemo.entity.Employee;
+import com.luv2code.cruddemo.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,17 +14,18 @@ import java.util.List;
 @RequestMapping("/api")
 public class EmployeeRestController {
 
-    private EmployeeDAO employeeDAO;
+    private EmployeeService employeeService;
 
-    // quick and dirty: inject employee dao
     @Autowired
-    public EmployeeRestController(EmployeeDAO theEmployeeDAO) {
-        employeeDAO = theEmployeeDAO;
+    public EmployeeRestController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
+
+
 
     // expose "/employee" and return list of employees
     @GetMapping("/employees")
     public List<Employee> findAll() {
-        return employeeDAO.findAll();
+        return employeeService.findAll();
     }
 }
